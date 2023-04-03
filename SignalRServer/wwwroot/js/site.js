@@ -1,7 +1,19 @@
-﻿const connection = new signalR.HubConnectionBuilder()
-    .withUrl("/learningHub")
+﻿onst connection = new signalR.HubConnectionBuilder()
+    .withUrl("/learningHub", {
+        transport: signalR.HttpTransportType.WebSockets | signalR.HttpTransportType.LongPolling,
+        headers: { "Key": "value" },
+        accessTokenFactory: null,
+        logMessageContent: true,
+        skipNegotiation: false,
+        withCredentials: true,
+        timeout: 100000
+    })
     .configureLogging(signalR.LogLevel.Information)
+    .withHubProtocol(new signalR.protocols.msgpack.MessagePackHubProtocol())
     .build();
+
+connection.serverTimeoutInMilliseconds = 30000;
+connection.keepAliveIntervalInMilliseconds = 15000;
 
 connection.on("ReceiveMessage", (message) => {
     $('#signalr-message-panel').prepend($('<div />').text(message));
