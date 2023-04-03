@@ -17,6 +17,11 @@ $('#btn-others-message').click(function () {
     connection.invoke("SendToOthers", message).catch(err => console.error(err.toString()));
 });
 
+$('#btn-self-message').click(function () {
+     var message = $('#self-message').val();
+     connection.invoke("SendToCaller", message).catch(err => console.error(err.toString()));
+});
+
 async function start() {
     try {
         await connection.start();
