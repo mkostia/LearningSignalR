@@ -5,20 +5,24 @@ Console.WriteLine("Hello, World!");
 Console.WriteLine("Please specify the URL of SignalR Hub");
 var url = "https://localhost:7169/learningHub";// Console.ReadLine();
 
- var hubConnection = new HubConnectionBuilder()
- .WithUrl(url)
-.Build();
+var hubConnection = new HubConnectionBuilder()
+                         .WithUrl(url)
+                         .Build();
 
-hubConnection.On<string>("ReceiveMessage",message => Console.WriteLine($"SignalR Hub Message: {message}"));
+hubConnection.On<string>("ReceiveMessage",
+    message => Console.WriteLine($"SignalR Hub Message: {message}"));
 
 try {
     await hubConnection.StartAsync();
 
-    while (true) {
+    var running = true;
+
+    while (running) {
         var message = string.Empty;
 
         Console.WriteLine("Please specify the action:");
         Console.WriteLine("0 - broadcast to all");
+        Console.WriteLine("1 - send to others");
         Console.WriteLine("exit - Exit the program");
 
         var action = Console.ReadLine();
@@ -26,10 +30,20 @@ try {
         Console.WriteLine("Please specify the message:");
         message = Console.ReadLine();
 
-        if (action == "exit")
-            break;
-
-        await hubConnection.SendAsync("BroadcastMessage", message);
+        switch (action) {
+            case "0":
+                await hubConnection.SendAsync("BroadcastMessage", message);
+                break;
+            case "1":
+                await hubConnection.SendAsync("SendToOthers", message);
+                break;
+            case "exit":
+                running = false;
+                break;
+            default:
+                Console.WriteLine("Invalid action specified");
+                break;
+        }
     }
 } catch (Exception ex) {
     Console.WriteLine(ex.Message);

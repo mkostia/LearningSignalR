@@ -12,6 +12,11 @@ $('#btn-broadcast').click(function () {
     connection.invoke("BroadcastMessage", message).catch(err => console.error(err.toString()));
 });
 
+$('#btn-others-message').click(function () {
+    var message = $('#others-message').val();
+    connection.invoke("SendToOthers", message).catch(err => console.error(err.toString()));
+});
+
 async function start() {
     try {
         await connection.start();

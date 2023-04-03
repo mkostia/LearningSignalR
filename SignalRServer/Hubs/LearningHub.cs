@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.SignalR;
+﻿using BlazorClient.Pages;
+using Microsoft.AspNetCore.SignalR;
 
 
 namespace SignalRServer.Hubs {
@@ -13,6 +14,9 @@ namespace SignalRServer.Hubs {
 
         public override async Task OnDisconnectedAsync(Exception? exception) {
             await base.OnDisconnectedAsync(exception);
+        }
+        public async Task SendToOthers(string message) {
+            await Clients.Others.ReceiveMessage(message);
         }
     }
 }
