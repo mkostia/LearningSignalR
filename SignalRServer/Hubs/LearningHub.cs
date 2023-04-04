@@ -40,7 +40,7 @@ namespace SignalRServer.Hubs {
         public async Task SendToGroup(string groupName, string message) {
             await Clients.Group(groupName).ReceiveMessage(GetMessageToSend(message));
         }
-        [Authorize("AdminOnly")
+        [Authorize("AdminOnly")]
         public async Task AddUserToGroup(string groupName) {
             await Groups.AddToGroupAsync(Context.ConnectionId, groupName);
             await Clients.Caller.ReceiveMessage($"Current user added to {groupName} group");
