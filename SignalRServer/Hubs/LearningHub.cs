@@ -1,4 +1,7 @@
 ﻿using BlazorClient.Pages;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.SignalR;
 using System.Runtime.CompilerServices;
 using System.Text.RegularExpressions;
@@ -6,6 +9,7 @@ using System.Threading;
 
 
 namespace SignalRServer.Hubs {
+   // [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme + "," + CookieAuthenticationDefaults.AuthenticationScheme)]
     public class LearningHub : Hub<ILearningHubClient> {
 
 

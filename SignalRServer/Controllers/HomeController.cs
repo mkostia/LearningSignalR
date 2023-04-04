@@ -1,4 +1,6 @@
 ﻿using System.Diagnostics;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
 using SignalRServer.Models;
 
@@ -11,7 +13,9 @@ public class HomeController : Controller {
         _logger = logger;
     }
 
-    public IActionResult Index() {
+    public async Task<IActionResult> Index() {
+        var accessToken = await HttpContext.GetTokenAsync("access_token");
+        Console.WriteLine($"Access token: {accessToken}");
         return View();
     }
 
@@ -26,5 +30,8 @@ public class HomeController : Controller {
 
     public IActionResult WebAssemblyClient() {
         return View();
+    }
+    public IActionResult LogOut() {
+        return new SignOutResult(new[] { CookieAuthenticationDefaults.AuthenticationScheme, "oidc" });
     }
 }

@@ -6,6 +6,7 @@ using IdentityExpress.Identity;
 using IdentityExpress.Manager.Api;
 using IdentityServer4;
 using IdentityServer4.Configuration;
+using IdentityServer4.Services;
 using AuthProvider.Data;
 using AuthProvider.Models;
 using Microsoft.AspNetCore.Builder;
@@ -107,6 +108,7 @@ namespace AuthProvider
 
             services.UseAdminUI();
             services.AddScoped<IdentityExpressDbContext, SqliteIdentityDbContext>();
+            services.AddScoped<IProfileService, UserProfileService>();
         }
 
         public void Configure(IApplicationBuilder app)

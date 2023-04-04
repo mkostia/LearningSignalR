@@ -1,8 +1,9 @@
-﻿onst connection = new signalR.HubConnectionBuilder()
+﻿const connection = new signalR.HubConnectionBuilder()
     .withUrl("/learningHub", {
         transport: signalR.HttpTransportType.WebSockets | signalR.HttpTransportType.LongPolling,
         headers: { "Key": "value" },
         accessTokenFactory: null,
+        //accessTokenFactory: () => myToken,
         logMessageContent: true,
         skipNegotiation: false,
         withCredentials: true,

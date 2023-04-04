@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotnetClient", "DotnetClien
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebSocketClient", "WebSocketClient\WebSocketClient.csproj", "{072939FE-5019-43E3-B3BE-89FF85B82B87}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AuthProvider", "AuthProvider\AuthProvider.csproj", "{4122FB12-7739-481B-9212-E98BF8591776}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AuthProvider", "AuthProvider\AuthProvider.csproj", "{AD87B946-384C-4541-BBD3-A4F55E9BFC05}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -35,10 +35,10 @@ Global
 		{072939FE-5019-43E3-B3BE-89FF85B82B87}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{072939FE-5019-43E3-B3BE-89FF85B82B87}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{072939FE-5019-43E3-B3BE-89FF85B82B87}.Release|Any CPU.Build.0 = Release|Any CPU
-		{4122FB12-7739-481B-9212-E98BF8591776}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4122FB12-7739-481B-9212-E98BF8591776}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4122FB12-7739-481B-9212-E98BF8591776}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4122FB12-7739-481B-9212-E98BF8591776}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AD87B946-384C-4541-BBD3-A4F55E9BFC05}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AD87B946-384C-4541-BBD3-A4F55E9BFC05}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AD87B946-384C-4541-BBD3-A4F55E9BFC05}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AD87B946-384C-4541-BBD3-A4F55E9BFC05}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
