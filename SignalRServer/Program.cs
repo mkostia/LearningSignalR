@@ -84,6 +84,7 @@ builder.Services.AddAuthorization(options => {
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
 builder.Services.AddSignalR(hubOptions => {
     hubOptions.KeepAliveInterval = TimeSpan.FromSeconds(10);
     hubOptions.MaximumReceiveMessageSize = 65_536;
@@ -97,7 +98,9 @@ builder.Services.AddSignalR(hubOptions => {
             Console.WriteLine($"SignalR supports {protocol} protocol.");
     }
 
-}).AddJsonProtocol(options => {
+})
+    .AddStackExchangeRedis("192.168.85.48:6379")
+    .AddJsonProtocol(options => {
     options.PayloadSerializerOptions.PropertyNamingPolicy = null;
     options.PayloadSerializerOptions.Encoder = null;
     options.PayloadSerializerOptions.IncludeFields = false;
