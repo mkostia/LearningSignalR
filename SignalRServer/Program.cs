@@ -99,7 +99,7 @@ builder.Services.AddSignalR(hubOptions => {
     }
 
 })
-    .AddStackExchangeRedis("192.168.85.48:6379")
+   // .AddStackExchangeRedis("192.168.85.48:6379")
     .AddJsonProtocol(options => {
     options.PayloadSerializerOptions.PropertyNamingPolicy = null;
     options.PayloadSerializerOptions.Encoder = null;
