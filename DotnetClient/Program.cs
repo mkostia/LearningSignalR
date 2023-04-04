@@ -31,7 +31,8 @@ var hubConnection = new HubConnectionBuilder()
                             })
                          .ConfigureLogging(logging => {
                              logging.SetMinimumLevel(LogLevel.Information);
-                             logging.AddConsole();
+                             //logging.AddConsole();
+                             
                          })
                          .AddMessagePackProtocol(options => {
                              options.SerializerOptions = MessagePackSerializerOptions.Standard

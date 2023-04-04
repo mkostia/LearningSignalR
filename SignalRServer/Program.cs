@@ -3,6 +3,18 @@ using SignalRServer.Hubs;
 using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddCors(options => {
+    options.AddPolicy("AllowAnyGet",
+        builder => builder.AllowAnyOrigin()
+            .WithMethods("GET")
+            .AllowAnyHeader());
+
+    options.AddPolicy("AllowExampleDomain",
+        builder => builder.WithOrigins("https://example.com")
+            .AllowAnyMethod()
+            .AllowAnyHeader()
+            .AllowCredentials());
+});
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
@@ -52,6 +64,8 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+app.UseCors("AllowAnyGet")
+   .UseCors("AllowExampleDomain");
 
 app.UseAuthorization();
 
