@@ -9,7 +9,8 @@ using System.Threading;
 
 
 namespace SignalRServer.Hubs {
-    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme + "," + CookieAuthenticationDefaults.AuthenticationScheme)]
+    // [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme + "," + CookieAuthenticationDefaults.AuthenticationScheme)]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme + "," +  CookieAuthenticationDefaults.AuthenticationScheme, Policy = "BasicAuth")]
     public class LearningHub : Hub<ILearningHubClient> {
 
 
@@ -35,11 +36,11 @@ namespace SignalRServer.Hubs {
         public async Task SendToIndividual(string connectionId, string message) {
             await Clients.Client(connectionId).ReceiveMessage(GetMessageToSend(message));
         }
-
+        [Authorize(Roles = "user")]
         public async Task SendToGroup(string groupName, string message) {
             await Clients.Group(groupName).ReceiveMessage(GetMessageToSend(message));
         }
-
+        [Authorize("AdminOnly")
         public async Task AddUserToGroup(string groupName) {
             await Groups.AddToGroupAsync(Context.ConnectionId, groupName);
             await Clients.Caller.ReceiveMessage($"Current user added to {groupName} group");

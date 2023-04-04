@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Http.Connections;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
+using SignalRServer;
 using SignalRServer.Hubs;
 using System.IdentityModel.Tokens.Jwt;
 using System.Text.Json.Serialization;
@@ -65,6 +66,20 @@ builder.Services.AddAuthentication(options => {
             return Task.CompletedTask;
         }
     };
+});
+
+builder.Services.AddAuthorization(options => {
+    options.AddPolicy("BasicAuth", policy => {
+        policy.RequireAuthenticatedUser();
+    });
+
+    options.AddPolicy("AdminClaim", policy => {
+        policy.RequireClaim("admin");
+    });
+
+    options.AddPolicy("AdminOnly", policy => {
+        policy.Requirements.Add(new RoleRequirement("admin"));
+    });
 });
 
 // Add services to the container.
