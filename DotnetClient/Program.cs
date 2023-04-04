@@ -10,12 +10,15 @@ using System.Threading.Channels;
 Console.WriteLine("Hello, World!");
 Console.WriteLine("Please specify the URL of SignalR Hub");
 var url = "https://localhost:7169/learningHub";// Console.ReadLine();
+Console.WriteLine("Please specify the access token");
 
+//var token = Console.ReadLine();
+var token = "eyJhbGciOiJSUzI1NiIsImtpZCI6InlHb3BkZ09DMExtZDhwemo3TXhBMnciLCJ0eXAiOiJhdCtqd3QifQ.eyJuYmYiOjE2ODA1OTMxNTAsImV4cCI6MTY4MDU5Njc1MCwiaXNzIjoiaHR0cHM6Ly9sb2NhbGhvc3Q6NTAwMSIsImNsaWVudF9pZCI6IndlYkFwcENsaWVudCIsInN1YiI6IjdkOTBiYTZmLTIwYTUtNDgzNi1iM2I4LTk1NmJiZDQzNmFhOSIsImF1dGhfdGltZSI6MTY4MDU5MzE0OSwiaWRwIjoibG9jYWwiLCJlbWFpbCI6InVzZXIxQG1haWwuY29tIiwibmFtZSI6InVzZXIxIiwicm9sZSI6WyJhZG1pbiIsInVzZXIiXSwiYWRtaW4iOiJ0cnVlIiwic2NvcGUiOlsib3BlbmlkIiwicHJvZmlsZSJdLCJhbXIiOlsicHdkIl19.aphMq7jzvj_EZlS5i7oxxyLh3jue0Q8DH_oS2rdqXP_mCdfYmvMtkjrOHLAKVmE_cKWZJuvysuJSCA5pIih8XnHnRR99UrF8qkxfsB9tXxwxWa1PNB9uFIqkvUl4hXoM1muAQPObqIoYuRUd6jERmOTsg0IMoatbMTxk2z9WQfRpUu5c418WtbCAYFOV_UtsFyWnt1bg6AtHewB3aJDO9heM4jo_YnkayVoQhjTlSbtbKGMQbMrwlR-FsF7yU96B8wPDsZwtlgJScuftHrI5vk7TABU7sNZt1RQxfQLJ-Tz01EoBSFok3fzxJQo5elWjfqH701SL5yWT1szAD8My2g";
 var hubConnection = new HubConnectionBuilder()
                          .WithUrl(url,
                             HttpTransportType.WebSockets,
                             options => {
-                                options.AccessTokenProvider = null;
+                                options.AccessTokenProvider = () => Task.FromResult(token);
                                 options.HttpMessageHandlerFactory = null;
                                 options.Headers["CustomData"] = "value";
                                 options.SkipNegotiation = true;

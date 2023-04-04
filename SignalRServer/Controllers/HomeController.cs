@@ -1,11 +1,13 @@
 ﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SignalRServer.Models;
 
 namespace SignalRServer.Controllers;
 
+[Authorize]
 public class HomeController : Controller {
     private readonly ILogger<HomeController> _logger;
 
@@ -15,6 +17,7 @@ public class HomeController : Controller {
 
     public async Task<IActionResult> Index() {
         var accessToken = await HttpContext.GetTokenAsync("access_token");
+        ViewBag.AccessToken = accessToken;
         Console.WriteLine($"Access token: {accessToken}");
         return View();
     }

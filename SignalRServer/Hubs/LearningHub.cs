@@ -9,7 +9,7 @@ using System.Threading;
 
 
 namespace SignalRServer.Hubs {
-   // [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme + "," + CookieAuthenticationDefaults.AuthenticationScheme)]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme + "," + CookieAuthenticationDefaults.AuthenticationScheme)]
     public class LearningHub : Hub<ILearningHubClient> {
 
 
